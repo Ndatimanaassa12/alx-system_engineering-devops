@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-### Displays information about subdomains
+splays information about subdomains
 ### $1 = domain | $2 = subdomain
 ### Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
 # shellcheck disable=SC2086
