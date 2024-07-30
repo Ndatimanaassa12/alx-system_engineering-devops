@@ -1,3 +1,4 @@
+
 #https://gist.github.com/thisismitch/7c91e9b2b63f837a0c4b
 global
 	log /dev/log	local0
@@ -41,6 +42,7 @@ defaults
 
 frontend http_front
    	 bind *:80
+	 redirect scheme https code 301 if !{ ssl_fc }
    	 stats uri /haproxy?stats
    	 default_backend http_back
 
@@ -60,3 +62,4 @@ backend http_back
 
 backend letsencrypt-backend
 	server letsencrypt 127.0.0.1:54321
+
