@@ -1,23 +1,17 @@
 #!/usr/bin/python3
-"""
-Queries the Reddit API and prints the titles of the first 10 hot posts listed
-for a given subreddit.
-"""
+"""Module with number_of_subscribers function"""
 import requests
+import sys
 
 
-def top_ten(subreddit):
-    """
-    Queries the Reddit API and prints the titles of the first 10 hot posts
-    listed for a given subreddit.
-    """
-    url = 'https://www.reddit.com/r/{}/hot.json?show="all"&limit=10'.format(
-        subreddit)
-    headers = {'User-Agent': 'Python/1.0(Holberton School 0x16)'}
-    response = requests.get(url, headers=headers)
-    try:
-        top_ten = response.json()['data']['children']
-        for post in top_ten:
-            print(post['data']['title'])
-    except KeyError:
-        print("None")
+def number_of_subscribers(subreddit):
+    """function that queries the Reddit API and returns the number of subscribers
+    for a given subreddit."""
+
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    json_obj = requests.get(url, headers={'User-Agent': 'My User Agent 1.0'})
+    if json_obj.status_code != 404:
+        dict_obj = json_obj.json()
+        return dict_obj.get('data').get('subscribers')
+    else:
+        return 0
